@@ -3,7 +3,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req, res) => {
   if (req.query["x-craft-live-preview"] || !req.query.entryUid) {
-    return res.status(401).json({ message: "Invalid token" });
+    return res
+      .status(401)
+      .json({ message: `${req.query.entryUid} & ${req.query}` });
   }
 
   const { data } = await fetch(
@@ -22,7 +24,6 @@ export default async (req, res) => {
     });
   }
 
-  // Enable Preview Mode by setting the cookies
   res.setPreviewData({
     previewToken: req.query.token ?? null,
   });
