@@ -12,7 +12,7 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <h1>Some Pretty Thing</h1>
+        <h1>{data.entry.title}</h1>
       </div>
     </Layout>
   );

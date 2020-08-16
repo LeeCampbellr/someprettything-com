@@ -16,11 +16,5 @@ export default async function (query, previewToken) {
     },
   });
 
-  const json = await res.json();
-  if (json.errors) {
-    console.error(json.errors);
-    throw new Error("Failed to fetch API");
-  }
-
-  return json.data;
+  return await res.json();
 }
