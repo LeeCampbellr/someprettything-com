@@ -12,7 +12,7 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <h1>{data.entry.title}</h1>
+        <h1>{data.entry.previewTest}</h1>
       </div>
     </Layout>
   );
@@ -22,8 +22,11 @@ export async function getStaticProps(context) {
   const { data } = await fetch(
     `
     {
-      entry {
-        title
+      entry(title: "Home")  {
+        ... on home_home_Entry {
+          title
+          previewTest
+        }
       }
     }
     `,
