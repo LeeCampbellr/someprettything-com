@@ -3,11 +3,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req, res) => {
   if (req.query["x-craft-live-preview"] || !req.query.entryUid) {
-    return res
-      .status(401)
-      .json({
-        message: `${req.query.entryUid} & ${req.query["x-craft-live-preview"]}`,
-      });
+    return res.status(401).json({
+      message: `${req.query.entryUid} & ${req.query["x-craft-live-preview"]}`,
+    });
   }
 
   const { data } = await fetch(
@@ -29,6 +27,8 @@ export default async (req, res) => {
   res.setPreviewData({
     previewToken: req.query.token ?? null,
   });
+
+  console.log(res.getHeaders());
 
   res.redirect(parsedUrl.pathname);
 };

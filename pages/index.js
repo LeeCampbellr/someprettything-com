@@ -20,6 +20,8 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps(context) {
+  console.log(context);
+
   const { data } = await fetch(
     `
     {
