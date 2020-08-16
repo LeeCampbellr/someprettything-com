@@ -5,7 +5,9 @@ export default async (req, res) => {
   if (req.query["x-craft-live-preview"] || !req.query.entryUid) {
     return res
       .status(401)
-      .json({ message: `${req.query.entryUid} & ${req.query}` });
+      .json({
+        message: `${req.query.entryUid} & ${req.query["x-craft-live-preview"]}`,
+      });
   }
 
   const { data } = await fetch(
