@@ -1,17 +1,11 @@
 import fetch from "@utils/fetch";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async (NextApiRequest, NextApiResponse) => {
-  // (1)
-  // Check for the right query params
-  if (!req.query["x-craft-live-preview"] || !req.query.entryUid) {
-    return res
-      .status(401)
-      .json({ message: "Not allowed to access this route" });
+export default async (req, res) => {
+  if (req.query["x-craft-live-preview"] || !req.query.entryUid) {
+    return res.status(401).json({ message: "Invalid token" });
   }
 
-  // (2)
-  // Get the url from Craft for the specific entry
   const { data } = await fetch(
     `
       {
@@ -28,16 +22,10 @@ export default async (NextApiRequest, NextApiResponse) => {
     });
   }
 
-  // (3)
-  // Set the token as preview data
+  // Enable Preview Mode by setting the cookies
   res.setPreviewData({
     previewToken: req.query.token ?? null,
   });
 
-  // (4)
-  const parsedUrl = new URL(data.entry.url);
-
-  // Redirect to the path from the fetched url
-  res.writeHead(307, { Location: parsedUrl.pathname });
-  res.end();
+  res.redirect(parsedUrl.pathname);
 };

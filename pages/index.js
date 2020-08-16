@@ -5,6 +5,7 @@ import fetch from "@utils/fetch";
 import Layout from "components/layout";
 
 export default function Home({ data }) {
+  console.log(data);
   return (
     <Layout>
       <Head>
@@ -23,9 +24,11 @@ export async function getStaticProps(context) {
     `
     {
       entry(title: "Home")  {
+        url
         ... on home_home_Entry {
           title
           previewTest
+          sourceUid
         }
       }
     }
