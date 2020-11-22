@@ -1,11 +1,10 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import fetch from "@utils/fetch";
+import cms from "@utils/cms";
 import Layout from "components/layout";
 
 export default function Home({ data }) {
-  console.log(data);
   return (
     <Layout>
       <Head>
@@ -20,15 +19,17 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps(context) {
-  const { data } = await fetch(
+  console.log(context)
+  
+  const { data } = await cms(
     `
     {
       entry(title: "Home")  {
         url
+        uri
         ... on home_home_Entry {
           title
           previewTest
-          sourceUid
         }
       }
     }
@@ -38,7 +39,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      data,
-    },
-  };
+      data
+    }
+  }
 }
