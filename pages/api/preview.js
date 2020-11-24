@@ -21,6 +21,8 @@ export default async function handler(req, res) {
   const { entry } = await cms(query, { uid: entryUid });
 
   res.setPreviewData({ token });
+
+  console.log(entry)
   
   if (entry.slug === 'home') {
     res.redirect('/');
