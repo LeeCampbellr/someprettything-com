@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 		}
   `
   
-  const data = await client.request(pageQuery, { uid: entryUid })
+  const data = await cms(query, { uid: entryUid })
 
   res.setPreviewData({ entryUid, token });
 
@@ -26,8 +26,7 @@ export default async function handler(req, res) {
     res.redirect('/');
   }
   else {
-    res.redirect(data.entry.slug)
-
+    res.redirect(`/${data.entry.slug}`)
   }
   res.end();
 
