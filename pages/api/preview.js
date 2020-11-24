@@ -21,7 +21,14 @@ export default async function handler(req, res) {
   const data = await client.request(pageQuery, { uid: entryUid })
 
   res.setPreviewData({ entryUid, token });
-  res.writeHead(307, { Location: `${data.entry.slug}` })
+
+  if (data.entry.slug === "home") {
+    res.redirect('/');
+  }
+  else {
+    res.redirect(data.entry.slug)
+
+  }
   res.end();
 
 }
