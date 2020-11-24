@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       }
   `;
 
-  const { entry } = await cms(query, undefined, { entryUid });
+  const { entry } = await cms(query, token, { entryUid });
 
   res.setPreviewData({ token });
   
