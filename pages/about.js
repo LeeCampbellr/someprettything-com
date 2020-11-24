@@ -1,44 +1,43 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import Layout from "components/layout";
+import cms from "@utils/cms";
 import { gql } from 'graphql-request';
-import cms from '@utils/cms';
+import Layout from "components/layout";
 
-export default function Home({ entry }) {
-
+export default function About({ entry }) {
+  console.log(entry);
   return (
     <Layout>
       <Head>
-        <title>Create Next App</title>
+        <title>About Some Pretty Thing</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <main>
         <h1>{entry.previewTest}</h1>
-      </div>
+      </main>
     </Layout>
-  );
+  )
 }
 
 export async function getStaticProps(context) {
 
   const query = gql`
-    query getHome {
-        entry(title: "Home")  {
+    query getAbout {
+        entry(title: "About")  {
           url
           uri
-          ... on home_home_Entry {
-            title
+          ... on about_about_Entry {
             previewTest
           }
         }
       }
   `;
 
-  const { entry } = context.preview 
+  const { entry } = context.preview
     ? await cms(query, context.previewData.token)
     : await cms(query);
- 
+
   return {
     props: { entry }
   };

@@ -4,30 +4,30 @@ import cms from '@utils/cms';
 export default async function handler(req, res) {
 
   if (!req.query.entryUid) {
-		return res.status(401).json({ message: "Not allowed to access this route" })
+		return res.status(401).json({ message: "Not allowed to access this route" });
   }
-
+  
   const { entryUid, token } = req.query;
 
-	const query = gql`
-		query($uid: [String]) {
-			entry(uid: $uid) {
-				id
-				slug
-			}
-		}
-  `
+  const query = gql`
+    query getSlug($entryUid: [String]) {
+        entry(uid: $entryUid)  {
+          id
+          slug
+        }
+      }
+  `;
+
+  const { entry } = await cms(query, undefined, { entryUid });
+
+  res.setPreviewData({ token });
   
-  const data = await cms(query, { uid: entryUid })
-
-  res.setPreviewData({ entryUid, token });
-
-  if (data.entry.slug === "home") {
+  if (entry.slug === 'home') {
     res.redirect('/');
+    return res.end();
   }
-  else {
-    res.redirect(`/${data.entry.slug}`)
-  }
-  res.end();
+
+  res.redirect(`/${entry.slug}`);
+  return res.end();
 
 }
