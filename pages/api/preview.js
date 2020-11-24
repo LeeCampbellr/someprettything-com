@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const { entryUid, token } = req.query;
 
   const query = gql`
-    query (uid: [String]) {
+    query(uid: [String]) {
         entry(uid: $uid)  {
           id
           slug
