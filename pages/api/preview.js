@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 		query($uid: [String]) {
 			entry(uid: $uid) {
 				id
-				uri
+				slug
 			}
 		}
   `
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   const data = await client.request(pageQuery, { uid: entryUid })
 
   res.setPreviewData({ entryUid, token });
-  res.writeHead(307, { Location: `${data.entry.uri}` })
+  res.writeHead(307, { Location: `${data.entry.slug}` })
   res.end();
 
 }
