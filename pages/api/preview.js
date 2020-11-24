@@ -24,10 +24,9 @@ export default async function handler(req, res) {
   
   if (entry.slug === 'home') {
     res.redirect('/');
-    return res.end();
+  } else {
+    res.redirect(`/${entry.slug}`);
   }
-
-  res.redirect(`/${entry.slug}`);
-  return res.end();
+  res.end();
 
 }
