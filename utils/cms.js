@@ -1,17 +1,16 @@
-export default async function(query, previewToken) {
-  let craftUrl = 'https://dev.someprettything.com/api';
+import { GraphQLClient } from 'graphql-request';
 
-  if (previewToken && previewToken !== '') {
-    craftUrl += '?token=' + previewToken;
+export default async function(query, entryUid, token) {
+
+  let endpoint = 'https://dev.someprettything.com/api';
+
+  if (typeof token !== 'undefined') {
+    endpoint += `?token=${token}`;
   }
+  
+  const client = new GraphQLClient(endpoint);
 
-  const res = await fetch(craftUrl, {
-    method: 'post',
-    body: query,
-    headers: {
-      'Content-Type': 'application/graphql',
-    },
-  });
+  const data = await client.request(query, { entryUid });
 
-  return await res.json();
+  return data;
 }

@@ -1,10 +1,12 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import cms from "@utils/cms";
 import Layout from "components/layout";
+import { gql } from 'graphql-request';
+import cms from '@utils/cms';
 
-export default function Home({ data }) {
+export default function Home({ entry }) {
+
   return (
     <Layout>
       <Head>
@@ -12,34 +14,33 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <h1>{data.entry.previewTest}</h1>
+        <h1>{entry.previewTest}</h1>
       </div>
     </Layout>
   );
 }
 
 export async function getStaticProps(context) {
-  console.log(context)
-  
-  const { data } = await cms(
-    `
-    {
-      entry(title: "Home")  {
-        url
-        uri
-        ... on home_home_Entry {
-          title
-          previewTest
+
+  const query = gql`
+    query getDraft($entryUid: [String]) {
+        entry(uid: $entryUid)  {
+          url
+          uri
+          ... on home_home_Entry {
+            title
+            previewTest
+          }
         }
       }
-    }
-    `,
-    context.preview ? context.previewData?.previewToken : undefined
-  );
+  `;
 
+  const { entry } = context.preview 
+    ? await cms(query, context.previewData.entryUid, context.previewData.token)
+    : await cms(query, '743e3820-138c-497d-8c87-108e0364d79f');
+ 
   return {
-    props: {
-      data
-    }
-  }
+    props: { entry }
+  };
+
 }
