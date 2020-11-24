@@ -23,8 +23,8 @@ export default function Home({ entry }) {
 export async function getStaticProps(context) {
 
   const query = gql`
-    query getDraft($entryUid: [String]) {
-        entry(uid: $entryUid)  {
+    query getHome {
+        entry(title: "Home")  {
           url
           uri
           ... on home_home_Entry {
@@ -37,7 +37,7 @@ export async function getStaticProps(context) {
 
   const { entry } = context.preview 
     ? await cms(query, context.previewData.entryUid, context.previewData.token)
-    : await cms(query, '743e3820-138c-497d-8c87-108e0364d79f');
+    : await cms(query);
  
   return {
     props: { entry }
