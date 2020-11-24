@@ -10,15 +10,15 @@ export default async function handler(req, res) {
   const { entryUid, token } = req.query;
 
   const query = gql`
-    query getSlug($entryUid: [String]) {
-        entry(uid: $entryUid)  {
+    query (uid: [String]) {
+        entry(uid: $uid)  {
           id
           slug
         }
       }
   `;
 
-  const { entry } = await cms(query, token, { entryUid });
+  const { entry } = await cms(query, {uid: entryUid });
 
   res.setPreviewData({ token });
   
