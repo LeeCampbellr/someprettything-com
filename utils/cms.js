@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 
-export default async function(query, entryUid, token) {
+export default async function(query, token, entryUid) {
 
   let endpoint = 'https://dev.someprettything.com/api';
 
@@ -10,7 +10,10 @@ export default async function(query, entryUid, token) {
   
   const client = new GraphQLClient(endpoint);
 
-  const data = await client.request(query, { entryUid });
+  const data = typeof entryUid !== 'undefined'
+    ? await client.request(query, { uid: entryUid })
+    : await client.request(query);
 
   return data;
+
 }

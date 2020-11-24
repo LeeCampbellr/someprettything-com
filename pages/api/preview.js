@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const { entryUid, token } = req.query;
 
   const query = gql`
-    query($uid: [String]) {
+    query getSlug($uid: [String]) {
         entry(uid: $uid)  {
           id
           slug
@@ -18,11 +18,9 @@ export default async function handler(req, res) {
       }
   `;
 
-  const { entry } = await cms(query, { uid: entryUid });
+  const { entry } = await cms(query, undefined, entryUid);
 
   res.setPreviewData({ token });
-
-  console.log(entry)
   
   if (entry.slug === 'home') {
     res.redirect('/');
