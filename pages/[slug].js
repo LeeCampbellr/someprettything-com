@@ -51,8 +51,8 @@ export async function getStaticProps(context) {
   `;
 
   const { entry } = context.preview
-    ? await cms(postQuery, { slug: context.params.slug })
-    : await cms(postQuery, { slug: context.params.slug }, context.previewData.token);
+    ? await cms(postQuery, { slug: context.params.slug }, context.previewData.token)
+    : await cms(postQuery, { slug: context.params.slug });
 
   return {
     props: { entry },
