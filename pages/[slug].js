@@ -5,14 +5,14 @@ import Layout from "components/layout"
 import { gql } from "graphql-request"
 import cms from "@utils/cms"
 
-export default function Post({ post }) {
+export default function Post({ entry }) {
   return (
     <Layout>
       <Head>
-        <title>This is a post... hopefully</title>
+        <title>{entry.title}</title>
       </Head>
       <main>
-        <h1></h1>
+        <h1>{entry.title}</h1>
       </main>
     </Layout>
   )
@@ -33,27 +33,26 @@ export async function getStaticPaths() {
   return {
     paths: entries?.map((post) => ({
       params: {
-        slug: post.slug,
-        uid: post.uid,
-      },
+        slug: post.slug
+      }
   })) ,
     fallback: false
   };
 }
 
 export async function getStaticProps(context) {
-  console.log(context.params)
-  // const postQuery = gql`
-  //   query getPost($uid: [String]) {
-  //     entry(uid: $uid) {
-  //       title
-  //     }
-  //   }
-  // `;
 
-  // const { post } = await cms(postQuery, params.uid);
+  const postQuery = gql`
+    query getPost($slug: [String]) {
+      entry(slug: $slug) {
+        title
+      }
+    }
+  `;
+
+  const { entry } = await cms(postQuery, { slug: context.params.slug });
 
   return {
-    props: {},
+    props: { entry },
   };
 }

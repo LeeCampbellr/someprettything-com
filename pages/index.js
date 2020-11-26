@@ -20,8 +20,9 @@ export default function Home({ entry, entries }) {
         <div>
           <ul>
             {entries.map((post) => (
-              <li>
-                <a href={post.slug}>{post.title}</a></li>
+              <li key={post.slug}>
+                <a href={post.slug}>{post.title}</a>
+              </li>
             ))}
           </ul>
         </div>
@@ -50,7 +51,7 @@ export async function getStaticProps(context) {
   `;
 
   const { entry, entries } = context.preview 
-    ? await cms(query, context.previewData.token)
+    ? await cms(query, undefined, context.previewData.token)
     : await cms(query);
  
   return {

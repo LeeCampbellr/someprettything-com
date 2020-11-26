@@ -35,7 +35,7 @@ export async function getStaticProps(context) {
   `;
 
   const { entry } = context.preview
-    ? await cms(query, context.previewData.token)
+    ? await cms(query, undefined, context.previewData.token)
     : await cms(query);
 
   return {
