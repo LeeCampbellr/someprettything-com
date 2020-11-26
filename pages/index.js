@@ -5,7 +5,7 @@ import Layout from "components/layout";
 import { gql } from 'graphql-request';
 import cms from '@utils/cms';
 
-export default function Home({ entry }) {
+export default function Home({ entry, entries }) {
 
   return (
     <Layout>
@@ -13,9 +13,19 @@ export default function Home({ entry }) {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <h1>{entry.previewTest}</h1>
-      </div>
+      <main>
+        <div>
+          <h1>{entry.previewTest}</h1>
+        </div>
+        <div>
+          <ul>
+            {entries.map((post) => (
+              <li>
+                <a href={post.slug}>{post.title}</a></li>
+            ))}
+          </ul>
+        </div>
+      </main>
     </Layout>
   );
 }
@@ -32,15 +42,19 @@ export async function getStaticProps(context) {
             previewTest
           }
         }
+        entries(section: "posts", status: "Live", limit: 10) {
+          title 
+          slug
+        }
       }
   `;
 
-  const { entry } = context.preview 
+  const { entry, entries } = context.preview 
     ? await cms(query, context.previewData.token)
     : await cms(query);
  
   return {
-    props: { entry }
+    props: { entry, entries }
   };
 
 }
