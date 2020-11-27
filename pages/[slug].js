@@ -1,8 +1,10 @@
 import React from "react";
 import Head from "next/head"
+import Image from 'next/image'
 import styled from "styled-components"
 import Layout from "components/layout"
 import { gql } from "graphql-request"
+
 import cms from "@utils/cms"
 
 export default function Post({ entry }) {
@@ -21,7 +23,7 @@ export default function Post({ entry }) {
 export async function getStaticPaths() {
   const postsQuery = gql`
     query getPosts {
-      entries(section: "posts", status: "Live", limit: 10) {
+      entries(section: "posts", status: "Live") {
         slug
         uid
       }
@@ -45,7 +47,13 @@ export async function getStaticProps(context) {
   const postQuery = gql`
     query getPost($slug: [String]) {
       entry(slug: $slug) {
-        title
+        ... on posts_post_Entry {
+          title
+          id
+          featuredImage {
+            url
+          }
+        }
       }
     }
   `;

@@ -43,7 +43,7 @@ export async function getStaticProps(context) {
             previewTest
           }
         }
-        entries(section: "posts", status: "Live", limit: 10) {
+        entries(section: "posts", status: "Live") {
           title 
           slug
         }
