@@ -4,8 +4,9 @@
     "paths": {
       "@atoms/*": ["components/atoms/*"],
       "@molecules/*": ["components/molecules/*"],
+      "@postBlocks/*": ["components/molecules/post/blocks/*"],
       "@organisms/*": ["components/organisms/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
     }
   }
 }

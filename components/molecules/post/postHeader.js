@@ -14,8 +14,8 @@ export default function PostHeader({ postHeader }) {
         <Image
           src={postHeader.featuredImage[0].url}
           alt={postHeader.featuredImage[0].title}
-          height={postHeader.featuredImage[0].height} 
-          width={postHeader.featuredImage[0].width}
+          layout="fill"
+          priority
           />
       </Img>
       <Content>
@@ -46,12 +46,8 @@ export default function PostHeader({ postHeader }) {
 }
 
 const Img = styled.div`
-  img {
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
-    max-width: 100%;
-  }
+  display: flex;
+  position: relative;
 `
 
 const Content = styled.div`
@@ -71,6 +67,15 @@ const Header = styled.div`
     display: flex;
     flex-direction: column-reverse;
     margin-top: var(--spacingMedium);
+
+    ${Img} {
+       &:before {
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: calc((9 / 16) * 100%);
+      }
+    }
 
     ${Content} {
       align-items: center;
