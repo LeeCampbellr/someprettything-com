@@ -5,16 +5,21 @@ import styled from "styled-components"
 import Layout from "components/layout"
 import { gql } from "graphql-request"
 
+import { Heading } from "@atoms/typography"
+import PostHeader from "@molecules/post/postHeader"
 import cms from "@utils/cms"
 
-export default function Post({ entry }) {
+export default function Post({ data }) {
+  const { postHeader, postContent } = data
+
   return (
     <Layout>
       <Head>
-        <title>{entry.title}</title>
+        <title>Post Title</title>
       </Head>
       <main>
-        <h1>{entry.title}</h1>
+        <PostHeader postHeader={postHeader} />
+        {/* <PostContent postContent={postContent} /> */}
       </main>
     </Layout>
   )
@@ -46,23 +51,36 @@ export async function getStaticProps(context) {
 
   const postQuery = gql`
     query getPost($slug: [String]) {
-      entry(slug: $slug) {
+      postHeader: entry(slug: $slug) {
         ... on posts_post_Entry {
           title
-          id
+          headerLayout
+          headerFontSize
+          postDate
           featuredImage {
+            height
+            title
             url
+            width
+          }
+          categories {
+            title
           }
         }
       }
+     postContent: entry(slug: $slug) {
+       ... on posts_post_Entry {
+        title
+       }
+     }
     }
   `;
 
-  const { entry } = context.preview
+  const data = context.preview
     ? await cms(postQuery, { slug: context.params.slug }, context.previewData.token)
     : await cms(postQuery, { slug: context.params.slug });
 
   return {
-    props: { entry },
+    props: { data },
   };
 }

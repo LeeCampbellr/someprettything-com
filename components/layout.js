@@ -1,11 +1,14 @@
 import React from "react";
 
+import Navigation from "@organisms/navigation"
+import Footer from "@organisms/footer"
+
 function Layout({ children }) {
   return (
     <React.Fragment>
-      <nav></nav>
+      <Navigation/>
       <main>{children}</main>
-      <footer></footer>
+      <Footer/>
     </React.Fragment>
   );
 }

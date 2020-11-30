@@ -1,0 +1,166 @@
+@import url("https://use.typekit.net/nzu8hkq.css");
+
+@font-face {
+  font-family: "1089_display";
+  src: url("./fonts/1098_display.woff2") format("woff2"),
+    url("./fonts/1098_display.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  // COLORS
+  --gray00: #f4f4f4;
+  --gray20: #e7e7e7;
+  --gray40: #a6a6a6;
+  --gray60: #606060;
+  --gray80: #333333;
+  --gray100: #111111;
+
+  --red00: #fbf9f9;
+  --red20: #f8f0ed;
+  --red40: #f4d9cf;
+  --red60: #f4b7a0;
+  --red80: #e48865;
+  --red100: #a4654e;
+
+  // MOTION
+  --ease-in: cubic-bezier(0.49, 0.025, 0.65, 0.65);
+  --ease-out: cubic-bezier(0.28, 0.44, 0.49, 1);
+  --ease-in-out: cubic-bezier(0.49, 0.025, 0.49, 1);
+  --ease-in-soft: cubic-bezier(0.49, 0.025, 0.685, 1);
+  --ease-out-soft: cubic-bezier(0.28, 0, 0.49, 1);
+
+  --transitionShort: all 300ms var(--ease-in-out);
+  --transitionBase: all 500ms var(--ease-in-out);
+  --transitionLong: all 800ms var(--ease-in-out);
+  --transitionStrong: all 1200ms var(--ease-in-out);
+
+  // TYPOGRAPHY
+  --typeSpacingSmall: 0.25rem;
+  --typeSpacingMedium: 0.5rem;
+  --typeSpacingLarge: 0.75rem;
+  --typeSpacingXLarge: 1rem;
+
+  --headingFamily: "1089_display", serif;
+  --headingColor: var(--gray100);
+  --headingLeading: 95%;
+  --headingTracking: 0;
+  --headingTransform: uppercase;
+  --headingWeight: 400;
+
+  --paragraphFamily: neuzeit-grotesk, sans-serif;
+  --paragraphColor: var(--gray80);
+  --paragraphLeading: 135%;
+  --paragraphTracking: 0;
+  --paragraphWeight: 400;
+
+  // RANDOM
+  --borderBase: 1px solid var(--gray20);
+
+  // LAYOUT
+  --containerXSmall: 30rem; // 480px
+  --containerSmall: 45rem; // 720px
+  --containerMedium: 55rem; // 880px
+  --containerLarge: 75rem; //1200px
+  --containerXlarge: 105rem; // 1680px
+
+  --gridTwo: 1fr;
+  --gridThree: 1fr;
+  --gridFour: 1fr;
+  --gridBrand: 1fr 1fr;
+  --gridInsta: 1fr 1fr;
+
+  --spacingGutter: 2rem;
+  --spacingSection: 0 1rem;
+  --spacingSlider: 1rem;
+
+  --spacingXXSmall: 1rem; // 16px
+  --spacingXSmall: 1rem; // 16px
+  --spacingSmall: 1.5rem; // 24px
+  --spacingMedium: 2.5rem; //40px
+  --spacingMarge: 3rem; //40px
+  --spacingLarge: 4rem; //64px
+  --spacingXLarge: 6rem; // 96px
+  --spacingXXLarge: 8rem; // 128px
+
+  --zLost: -1;
+  --zBack: 0;
+  --zBase: 1;
+  --zFront: 5;
+  --zNav: 10;
+  --zModal: 20;
+  --zLoad: 100;
+  --zTop: 500;
+  --zCursor: 750;
+  --zTest: 1000;
+
+  @media (min-width: 480px) {
+    --spacingGutter: 1rem;
+    --spacingSection: 0 2rem;
+    --spacingSlider: 2rem;
+
+    --spacingXXSmall: 1rem; // 16px
+    --spacingXSmall: 1rem; // 16px
+    --spacingSmall: 1.5rem; // 24px
+    --spacingMedium: 2.5rem; //40px
+    --spacingMarge: 3.25rem; //56px
+    --spacingLarge: 5rem; //64px
+    --spacingXLarge: 6rem; // 96px
+    --spacingXXLarge: 10rem; // 160px
+  }
+
+  @media (min-width: 880px) {
+    --gridTwo: 1fr 1fr;
+    --gridThree: repeat(3, 1fr);
+    --gridFour: repeat(4, 1fr);
+    --gridInsta: repeat(4, 1fr);
+    --gridBrand: repeat(6, 1fr);
+
+    --spacingGutter: 2rem;
+    --spacingSection: 0 2.5rem;
+    --spacingSlider: 2.5rem;
+
+    --spacingXSmall: 1.25rem; // 20px
+    --spacingSmall: 2.25rem; // 36px
+    --spacingMedium: 3.25rem; // 56px
+    --spacingMarge: 6rem; // 96px
+    --spacingLarge: 8rem; // 128px
+    --spacingXLarge: 10rem; // 160px
+    --spacingXXLarge: 12.5rem; // 200px
+  }
+
+  @media (min-width: 1200px) {
+    --spacingGutter: 2.5rem;
+    --spacingSection: 0 3rem;
+    --spacingSlider: 3rem;
+
+    --spacingXSmall: 1.5rem; // 24px
+    --spacingSmall: 3rem; // 48px
+    --spacingMedium: 4.5rem; // 72px
+    --spacingMarge: 8rem; // 160px
+    --spacingLarge: 10rem; // 128px
+    --spacingXLarge: 12.5rem; // 200px
+    --spacingXXLarge: 15rem; // 240px
+  }
+
+  @media (min-width: 1440px) {
+    --spacingGutter: 4rem;
+    --spacingSection: 0 3.5rem;
+    --spacingSlider: 3.5rem;
+
+    --spacingXSmall: 1.75rem; // 28px
+    --spacingMedium: 5rem; // 80px
+    --spacingMarge: 8rem; // 200px
+    --spacingLarge: 12.5rem; // 160px
+    --spacingXLarge: 15rem; // 240px
+    --spacingXXLarge: 25rem; // 400px
+  }
+
+  @media (min-width: 1680px) {
+    --spacingGutter: 5rem;
+    --spacingSection: 0 4rem;
+    --spacingSlider: 4rem;
+  }
+}
