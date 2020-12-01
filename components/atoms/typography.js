@@ -55,7 +55,7 @@ export const Heading = styled(HeadingWrapper)`
     if (props.center) return "center"
     else return "left"
   }};
-  transition: var(--transitionBase);
+  /* transition: var(--transitionBase); */
 
   /* FLUID FONT SIZES */
   ${props => {
