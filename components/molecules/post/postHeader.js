@@ -73,7 +73,6 @@ const Header = styled.div`
     ${Img} {
       img {
         max-width: initial!important;
-        object-fit: cover;
       }
     }
 
@@ -155,6 +154,10 @@ const Header = styled.div`
       ${media.sm`
          grid-column: 2;
       `}
+
+      img {
+        object-fit: cover;
+      }
     }
 
     ${Content} {
