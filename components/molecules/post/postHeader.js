@@ -16,7 +16,7 @@ export default function PostHeader({ postHeader }) {
           alt={postHeader.featuredImage[0].title}
           width={postHeader.featuredImage[0].width}
           height={postHeader.featuredImage[0].height}
-          layout="responsive"
+          layout={postHeader.headerLayout === "split" ? "fill" : "responsive" }
           priority
           />
       </Img>
