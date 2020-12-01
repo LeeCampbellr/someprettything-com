@@ -48,6 +48,8 @@ export default function PostHeader({ postHeader }) {
 }
 
 const Img = styled.div`
+  position: relative;
+
 `
 
 const Content = styled.div`
@@ -71,6 +73,7 @@ const Header = styled.div`
     ${Img} {
       img {
         max-width: initial!important;
+        object-fit: cover;
       }
     }
 
