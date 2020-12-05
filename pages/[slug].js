@@ -29,7 +29,7 @@ export default function Post({ data }) {
 export async function getStaticPaths() {
   const postsQuery = gql`
     query getPosts {
-      entries(section: "posts", status: "Live") {
+      entries(section: "posts") {
         slug
         uid
       }
