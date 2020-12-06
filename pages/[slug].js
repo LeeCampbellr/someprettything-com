@@ -210,8 +210,7 @@ export async function getStaticProps(context) {
     }
   `;
 
-  const preview = typeof context.preview !== 'undefined';
-  console.log(context.preview)
+  const preview = context.preview ? true : false;
 
   const data = context.preview
     ? await cms(postQuery, { slug: context.params.slug }, context.previewData.token)
