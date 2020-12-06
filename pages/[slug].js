@@ -1,17 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Head from "next/head"
 import Image from 'next/image'
 import styled from "styled-components"
 import Layout from "components/layout"
 import { gql } from "graphql-request"
 
+
 import { Heading } from "@atoms/typography"
 import PostHeader from "@molecules/post/postHeader"
 import PostContent from "@molecules/post/postContent"
+import ScrollMem from  "@utils/scrollPos.js"
 import cms from "@utils/cms"
 
-export default function Post({ data }) {
+export default function Post({ data, preview }) {
   const { postHeader, postContent } = data
+  console.log(preview)
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <Layout>
@@ -203,11 +210,14 @@ export async function getStaticProps(context) {
     }
   `;
 
+  const preview = typeof context.preview !== 'undefined';
+  console.log(context.preview)
+
   const data = context.preview
     ? await cms(postQuery, { slug: context.params.slug }, context.previewData.token)
     : await cms(postQuery, { slug: context.params.slug });
 
   return {
-    props: { data },
+    props: { data, preview },
   };
 }
