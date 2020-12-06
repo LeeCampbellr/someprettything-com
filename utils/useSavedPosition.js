@@ -26,9 +26,10 @@ function setPosition() {
     try {
         const position = JSON.parse(window.sessionStorage.getItem(key()));
         if (position && Array.isArray(position)) {
+            console.log('scrolling to: ' + JSON.stringify(position));
             window.scrollTo(position[0], position[1]);
         }
-    } catch (error) {
-        console.log(error);
+    } catch (e) {
+        console.log('no currentPosition yet: ' + e)
     }
 }
