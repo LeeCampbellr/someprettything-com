@@ -25,6 +25,7 @@ function holdPostion() {
 function setPosition() {
     try {
         const position = JSON.parse(window.sessionStorage.getItem(key()));
+        console.log(position)
         if (position && Array.isArray(position)) {
             console.log('scrolling to: ' + JSON.stringify(position));
             window.scrollTo(position[0], position[1]);
