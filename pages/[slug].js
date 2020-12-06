@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useMemo} from "react";
 import Head from "next/head"
 import Image from 'next/image'
 import styled from "styled-components"
@@ -9,17 +9,14 @@ import { gql } from "graphql-request"
 import { Heading } from "@atoms/typography"
 import PostHeader from "@molecules/post/postHeader"
 import PostContent from "@molecules/post/postContent"
-import ScrollMem from  "@utils/scrollPos.js"
+import useSavedPosition from  "@utils/useSavedPosition.js"
 import cms from "@utils/cms"
 
 export default function Post({ data, preview }) {
   const { postHeader, postContent } = data
-  console.log(preview)
 
-  useEffect(() => {
-
-  }, [])
-
+  if (preview) useSavedPosition();
+  
   return (
     <Layout>
       <Head>

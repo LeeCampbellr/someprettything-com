@@ -13,13 +13,13 @@ const ImageGallery = ({ parts }) => {
       id={parts.sectionId}
     >
       {parts.gallery.map((partImage, index) => (
-        <React.Fragment>
+        <React.Fragment key={index}>
           {partImage.kind === "image" ? (
-            <Image key={index}>
+            <Image>
               <img src={partImage.url} alt={partImage.title} />
             </Image>
           ) : (
-            <Video key={index}>
+            <Video>
               <video autoPlay loop muted playsInline>
                 <source src={partImage.url} type="video/mp4" />
               </video>
